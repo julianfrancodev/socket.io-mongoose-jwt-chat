@@ -23,6 +23,23 @@ const generateJwt =(uid)=>{
 });
 }
 
+const validateDartJwt =(token = '') =>{
+
+
+   
+    try {
+
+        const {uid} = jwt.verify(token, process.env.JWT);
+        const id = uid;
+        return [true, id];        
+    } catch (error) {
+       return [false, null];
+    }
+
+
+}
+
 module.exports ={
-    generateJwt
+    generateJwt,
+    validateDartJwt
 }
