@@ -87,20 +87,13 @@ const login = async (req, res)=>{
 
 const renewToken = async (req, res,)=>{
 
-    const {uid} = req;
-
+    const uid = req.uid;
+    console.log(uid);
     const token = await generateJwt(uid);
 
-    const userDB = await User.findOne({uid});
+    const userDB = await User.findById(uid);
 
-    if(!userDB){
-        res.json({
-            ok: false,
-            message: 'User not found'
-        })
-    }
-
-
+    console.log(userDB);
     res.json({
         ok: true,
         user: userDB,

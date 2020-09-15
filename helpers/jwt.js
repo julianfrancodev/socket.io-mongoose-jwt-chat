@@ -1,21 +1,26 @@
 const jwt = require('jsonwebtoken');
 
 const generateJwt =(uid)=>{
-   return new Promise((resolve, reject)=>{
-    const paylaod = {
-        uid
-    }
+   return new Promise( (resolve, reject) => {
 
-    jwt.sign(paylaod, process.env.JWT,{
-        expiresIn: '48h'
-    },(err, token)=>{
-        if(err){
-            reject('No token generated')
-        }else{
-            resolve(token);
+    const payload = { uid };
+
+    jwt.sign( payload, process.env.JWT, {
+        expiresIn: '24h'
+    }, ( err, token ) => {
+
+        if ( err ) {
+            // no se pudo crear el token
+            reject('Failed jwt generated');
+
+        } else {
+            // TOKEN!
+            resolve( token );
         }
-    });
-   });
+
+    })
+
+});
 }
 
 module.exports ={
